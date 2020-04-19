@@ -20,7 +20,7 @@ public class UserMasterDaoImp implements UserMasterDao {
  static final Logger logger = Logger.getLogger(UserMasterDaoImp.class);
 
 	static {
-		PropertyConfigurator.configure("C:\\Users\\Abhishek\\Desktop\\CoreJava\\Ab\\log4j\\log4j.properties");
+		PropertyConfigurator.configure("C:\\Abhi\\Asset Management System\\log4j\\log4j.properties");
 	}
 	@Override
 	public UserMaster readUserMaster(String userId) throws InvalidIdException {

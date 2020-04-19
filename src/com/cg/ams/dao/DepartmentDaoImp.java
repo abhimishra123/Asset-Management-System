@@ -16,7 +16,7 @@ public class DepartmentDaoImp implements DepartmentDao {
 	private static HashMap<String,Department> departments=new HashMap<String,Department>();
 	static final Logger logger = Logger.getLogger(UserMasterDaoImp.class);
 	static {
-		PropertyConfigurator.configure("C:\\Users\\Abhishek\\Desktop\\CoreJava\\Ab\\log4j\\log4j.properties");
+		PropertyConfigurator.configure("C:\\Abhi\\Asset Management System\\log4j\\log4j.properties");
 	}
 	@Override
 	public Department readDepartment(String Dept_id) throws ReadOperationFailed {

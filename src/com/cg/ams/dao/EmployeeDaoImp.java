@@ -20,7 +20,7 @@ public class EmployeeDaoImp implements EmployeeDao {
 
 	 static final Logger logger = Logger.getLogger(EmployeeDaoImp.class);
 	 static {
-			PropertyConfigurator.configure("C:\\Users\\Abhishek\\Desktop\\CoreJava\\Ab\\log4j\\log4j.properties");
+			PropertyConfigurator.configure("C:\\Abhi\\Asset Management System\\log4j\\log4j.properties");
 		}
 	@Override
 	public Employee readEmployee(String Employee_no)throws ReadOperationFailed {

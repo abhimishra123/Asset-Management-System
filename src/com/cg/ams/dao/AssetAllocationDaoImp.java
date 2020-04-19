@@ -20,7 +20,7 @@ public class AssetAllocationDaoImp implements AssetAllocationDao {
 	private static HashMap<String, AssetAllocation> allocations = new HashMap<String, AssetAllocation>();
 	static final Logger logger = Logger.getLogger(UserMasterDaoImp.class);
 	static {
-		PropertyConfigurator.configure("C:\\Users\\Abhishek\\Desktop\\CoreJava\\Ab\\log4j\\log4j.properties");
+		PropertyConfigurator.configure("C:\\Abhi\\Asset Management System\\log4j\\log4j.properties");
 	}
 	@Override
 	public AssetAllocation readAssetAllocation(String allocationId) throws ReadOperationFailed{
@@ -57,7 +57,8 @@ public class AssetAllocationDaoImp implements AssetAllocationDao {
 			return true;
 		}
 		else {
-			return false;
+			throw new  AssetAlreadyExistException();
+			
 		}
 	}
 	@Override

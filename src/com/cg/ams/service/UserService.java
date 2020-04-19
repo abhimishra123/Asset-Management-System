@@ -12,4 +12,5 @@ public interface UserService {
 	public String checkStatus(String assetRequestId) throws InvalidIdException;
 	public Employee  employeeData(String empId) throws ReadOperationFailed;
 	public Department deptData(String deptId) throws ReadOperationFailed;
+	public String update(AssetForm form)throws UpdateFailedException;
 }

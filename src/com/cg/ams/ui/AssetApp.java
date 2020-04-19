@@ -19,6 +19,7 @@ import com.cg.ams.dao.EmployeeDaoImp;
 import com.cg.ams.dao.UserMasterDaoImp;
 import com.cg.ams.exception.AssetAlreadyExistException;
 import com.cg.ams.exception.AuthenticationFailedException;
+import com.cg.ams.exception.InvalidIdException;
 import com.cg.ams.exception.ReadOperationFailed;
 import com.cg.ams.exception.UpdateFailedException;
 import com.cg.ams.service.AdminServiceImpl;
@@ -50,8 +51,12 @@ public class AssetApp {
 		username=sc.nextLine();
 		System.out.println("Enter password");
 		password=sc.nextLine();
-		
+		try {
 		validate=authenticate.verify(username,password);
+		
+		}catch(AuthenticationFailedException e) {
+			System.out.println(e.getMessage());
+		}
 		Employee emp = user.employeeData(validate.getEmployee_no());
 		//Department dept = user.deptData(emp.getDept_Id());
 		//String mgrId = emp.getMgr();
@@ -88,13 +93,20 @@ public class AssetApp {
 					}
 					
 					break;
-					case 2: ArrayList list = admin.checkRequests();
+					case 2: try{ArrayList list = admin.checkRequests();
 					System.out.println(list);
+					}catch(ReadOperationFailed e) {
+						System.out.println(e.getMessage());
+					}
 					break;
-					case 3: ArrayList list1 = admin.assetAvailability();
+					
+					case 3: try{ArrayList list1 = admin.assetAvailability();
 					System.out.println(list1);
+						}catch(ReadOperationFailed e){
+						System.out.println(e.getMessage());
+					}
 					break;
-					case 4: System.out.println("Enter Request Id");
+					case 4:try { System.out.println("Enter Request Id");
 					String requestId = sc.next();
 					System.out.println("Want to Approve/Decline");
 					String response = sc.next();
@@ -108,6 +120,8 @@ public class AssetApp {
 					}
 					else{
 						System.out.println("Enter valid response");
+					}}catch(ReadOperationFailed| AssetAlreadyExistException| InvalidIdException e) {
+						System.out.println(e.getMessage());
 					}
 					break;
 					case 5: flag = false;
@@ -140,16 +154,24 @@ public class AssetApp {
 					System.out.println("Manager Id"+managerId);
 					String requestId=emp.getEmployee_no()+emp.getMgr();
 					AssetForm form = new AssetForm(empId, managerId, assetName,requestId,releasedate,"processing");
+					try {
 					boolean update=user.raiseRequest(form);
 					if(update)
 						System.out.println("Form successfully submitted");
 					System.out.println("your requestId is:"+requestId);
+					}catch(UpdateFailedException e) {
+						System.out.println(e.getMessage());
+					}
 					break;
 					case 2:System.out.println("Enter RequestId");
 					String request_Id;
 					request_Id=sc.next();
+					try {
 					String status = user.checkStatus(request_Id);
 					System.out.println("status: "+status);
+					}catch(InvalidIdException e) {
+						System.out.println(e.getMessage());
+					}
 					case 3: flag = false;
 					break;
 					default: System.out.println("Enter Correct choice");

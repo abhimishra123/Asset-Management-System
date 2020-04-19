@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService{
 		return result;
 	 
 	}
-	public String update(AssetForm form){
+	public String update(AssetForm form)throws UpdateFailedException{
 		AssetForm result=forms.putIfAbsent(form.getRequestId(), form);
 	    return form.getRequestId();
 	}

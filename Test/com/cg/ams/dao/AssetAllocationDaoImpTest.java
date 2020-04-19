@@ -1,9 +1,19 @@
+
 package com.cg.ams.dao;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.cg.ams.bean.AssetAllocation;
+import com.cg.ams.exception.AssetAlreadyExistException;
+import com.cg.ams.exception.InvalidIdException;
+import com.cg.ams.exception.ReadOperationFailed;
+import com.cg.ams.exception.UpdateFailedException;
 
 public class AssetAllocationDaoImpTest {
 
@@ -12,7 +22,7 @@ public static AssetAllocationDao asset= null;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		asset = new AssetAllocationDaoImp();
-		asset.mockData();
+		AssetAllocationDaoImp.mockData();
 	}
 
 	@AfterClass
@@ -21,7 +31,7 @@ public static AssetAllocationDao asset= null;
 	}
 
 	@Test
-	public void testReadAssetAllocationSuccessfully() {
+	public void testReadAssetAllocationSuccessfully() throws ReadOperationFailed {
 		assertEquals("ABC2", asset.readAssetAllocation("xyz1").getAssetId());
 	}
 	
@@ -32,17 +42,17 @@ public static AssetAllocationDao asset= null;
 	}
 
 	@Test
-	public void testCreateAssetAllocationSuccessfully() {
+	public void testCreateAssetAllocationSuccessfully() throws AssetAlreadyExistException {
 		assertTrue(asset.createAssetAllocation(new AssetAllocation("xyz7","ABC6","128", LocalDate.parse("2020-03-20"), LocalDate.parse("2020-02-17"))));
 	}
 
 	@Test
-	public void testUpdateAssetAllocationSuccessfully() {
+	public void testUpdateAssetAllocationSuccessfully() throws UpdateFailedException {
 		assertTrue(asset.updateAssetAllocation("xyz4", new AssetAllocation("xyz4","ABC8","130", LocalDate.parse("2020-01-15"), LocalDate.parse("2020-02-01"))));
 	}
 
 	@Test
-	public void testDeleteAssetAllocationSuccessfully() {
+	public void testDeleteAssetAllocationSuccessfully() throws InvalidIdException {
 		assertTrue(asset.deleteAssetAllocation("xyz2"));
 	}
 
