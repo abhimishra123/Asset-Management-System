@@ -2,9 +2,9 @@ package com.cg.ams.exception;
 
 public class AuthenticationFailedException extends Exception  {
 	
-	public AuthenticationFailedException() {
-		super();
-        System.out.println("Please enter valid login-id or password.");
+	@Override
+	public  String getMessage() {
+		return "Please enter valid username and password";
 	}
 	
 }

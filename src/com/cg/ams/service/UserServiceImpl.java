@@ -9,6 +9,7 @@ import com.cg.ams.dao.AssetFormDao;
 import com.cg.ams.dao.AssetFormDaoImp;
 import com.cg.ams.dao.DepartmentDaoImp;
 import com.cg.ams.dao.EmployeeDaoImp;
+import com.cg.ams.exception.InvalidIdException;
 import com.cg.ams.exception.ReadOperationFailed;
 import com.cg.ams.exception.UpdateFailedException;
 
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService{
 	    return form.getRequestId();
 	}
 	
-	public String checkStatus(String requestId)
+	public String checkStatus(String requestId) throws InvalidIdException
 	{
 		String result = as.checkStatusDao(requestId);
 		return result;

@@ -10,6 +10,8 @@ import org.apache.log4j.PropertyConfigurator;
 
 import com.cg.ams.bean.Asset;
 import com.cg.ams.bean.UserMaster;
+import com.cg.ams.exception.AssetAlreadyExistException;
+import com.cg.ams.exception.InvalidIdException;
 import com.cg.ams.exception.ReadOperationFailed;
 import com.cg.ams.exception.UpdateFailedException;
 
@@ -18,7 +20,7 @@ public class AssetDaoImp implements AssetDao {
 private static HashMap<String,Asset> assets=new HashMap<String,Asset>();
 static final Logger logger = Logger.getLogger(UserMasterDaoImp.class);
 static {
-	PropertyConfigurator.configure("C:\\Users\\Abhishek\\Desktop\\CoreJava\\\\Ab\\log4j\\log4j.properties");
+	PropertyConfigurator.configure("C:\\Users\\Abhishek\\Desktop\\CoreJava\\Ab\\log4j\\log4j.properties");
 }
 @Override
 public Asset readAsset(String AssetId) throws ReadOperationFailed{
@@ -52,7 +54,7 @@ public String read(String assetName) throws ReadOperationFailed{
 	throw new ReadOperationFailed();
 }
 @Override
-public boolean createAsset(Asset a) {
+public boolean createAsset(Asset a) throws AssetAlreadyExistException{
 	Asset result=assets.putIfAbsent(a.getAssetId(), a);
 	if(result == null) {
 		logger.info("Created Successfully");
@@ -60,7 +62,8 @@ public boolean createAsset(Asset a) {
     }
     else {
     	logger.info("Creation failed");
-    	return false;
+    	throw new AssetAlreadyExistException();
+    	
     }
 }
 @Override
@@ -77,14 +80,14 @@ public boolean updateAsset(String AssetId, Asset a) throws UpdateFailedException
 	}
 }
 @Override
-public boolean deleteAsset(String AssetId) {
+public boolean deleteAsset(String AssetId)throws InvalidIdException {
 	Asset a = assets.remove(AssetId);
 	if (a != null) {
 		return true;
 	}
-	return false;
+	throw new InvalidIdException();
 }
-public void mockData() {
+public static void mockData() {
 	assets.put("1",new Asset("ABC1","Monitor","Company:Lenovo c19-10,Screen:47cms",1,"Confirmed"));
 	assets.put("2",new Asset("ABC2","Mouse","Company:Dell",1,"Rejected"));
 	assets.put("3",new Asset("ABC3","Printer","Company:HP,Black Original Laser Jet ",1,"Accepted"));

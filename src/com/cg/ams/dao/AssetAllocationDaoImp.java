@@ -10,6 +10,8 @@ import org.apache.log4j.PropertyConfigurator;
 import com.cg.ams.bean.Asset;
 import com.cg.ams.bean.AssetAllocation;
 import com.cg.ams.bean.AssetForm;
+import com.cg.ams.exception.AssetAlreadyExistException;
+import com.cg.ams.exception.InvalidIdException;
 import com.cg.ams.exception.ReadOperationFailed;
 import com.cg.ams.exception.UpdateFailedException;
 
@@ -34,7 +36,7 @@ public class AssetAllocationDaoImp implements AssetAllocationDao {
 			}
 	}
 	
-	public boolean requestApproveDao(int requestId) throws ReadOperationFailed{
+	public boolean requestApproveDao(String requestId) throws ReadOperationFailed, AssetAlreadyExistException, InvalidIdException{
 		AssetFormDaoImp f = new AssetFormDaoImp();
 		AssetDaoImp asset = new AssetDaoImp(); 
 		
@@ -59,12 +61,16 @@ public class AssetAllocationDaoImp implements AssetAllocationDao {
 		}
 	}
 	@Override
-	public boolean createAssetAllocation(AssetAllocation a) {
+	public boolean createAssetAllocation(AssetAllocation a)  throws  AssetAlreadyExistException{
 		AssetAllocation result=allocations.putIfAbsent(a.getAllocationId(), a);
 	    if(result!=null) {
+	    	logger.info("User Master Created Successfully");
 	    	return true;
 	    }
-		return false;
+	    logger.info("User Master not created Successfully");
+	    throw new  AssetAlreadyExistException();
+		
+		
 	}
 	@Override
 	public boolean updateAssetAllocation(String allocationId, AssetAllocation a) throws UpdateFailedException{
@@ -78,14 +84,16 @@ public class AssetAllocationDaoImp implements AssetAllocationDao {
 		
 	}
 	@Override
-	public boolean deleteAssetAllocation(String allocationId) {
+	public boolean deleteAssetAllocation(String allocationId)throws InvalidIdException{
 		AssetAllocation a = allocations.remove(allocationId);
 		if (a != null) {
+			
 			return true;
 		}
-		return false;
+		throw new InvalidIdException();
+		
 	}
-	public void mockData() {
+	public static void mockData() {
 		allocations.put("1",new AssetAllocation("xyz1","ABC2","123", LocalDate.parse("2020-02-13"), LocalDate.parse("2020-02-27")));
 		allocations.put("2",new AssetAllocation("xyz2","ABC4","124", LocalDate.parse("2020-01-01"), LocalDate.parse("2020-01-24")));
 		allocations.put("3",new AssetAllocation("xyz3","ABC5","125", LocalDate.parse("2020-01-15"), LocalDate.parse("2020-02-01")));

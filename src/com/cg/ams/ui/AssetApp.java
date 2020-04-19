@@ -79,9 +79,14 @@ public class AssetApp {
 					System.out.println("Enter Asset Status (Available/Not available)");
 					String assetStatus = sc.next();
 					Asset a = new Asset(assetNumber, assetName, assetDes, assetQuantity, assetStatus);
-					boolean res=admin.addAsset(a);
-					if(res)
-						System.out.println("Asset Added Successfully");
+					try {
+						boolean res=admin.addAsset(a);
+						if(res)
+							System.out.println("Asset Added Successfully");
+					}catch(AssetAlreadyExistException e) {
+						System.out.println("e.getMessasge()");
+					}
+					
 					break;
 					case 2: ArrayList list = admin.checkRequests();
 					System.out.println(list);
@@ -90,7 +95,7 @@ public class AssetApp {
 					System.out.println(list1);
 					break;
 					case 4: System.out.println("Enter Request Id");
-					int requestId = sc.nextInt();
+					String requestId = sc.next();
 					System.out.println("Want to Approve/Decline");
 					String response = sc.next();
 					if(response.equalsIgnoreCase("Approve")){

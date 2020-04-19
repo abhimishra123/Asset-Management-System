@@ -2,9 +2,9 @@ package com.cg.ams.exception;
 
 public class InvalidIdException extends Exception {
   
-	public InvalidIdException() {
-		super();
-        System.out.println("Invalid Employee");
+	@Override
+	public  String getMessage() {
+		return "Enter valid Employee Id";
 	}
 	
 }
