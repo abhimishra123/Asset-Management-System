@@ -14,6 +14,6 @@ public interface AssetFormDao {
 	public String checkStatusDao(String assetRequestId) throws InvalidIdException;
 	public boolean changeStatusDao(String assetRequestId) throws InvalidIdException;
 	public boolean requestDeclineDao(String assetRequestId) throws InvalidIdException;
-	AssetForm read(String requestId) throws ReadOperationFailed, InvalidIdException;
+	AssetForm read(String requestId) throws InvalidIdException;
 	boolean createAssetForm(AssetForm a) throws AssetAlreadyExistException;
 }

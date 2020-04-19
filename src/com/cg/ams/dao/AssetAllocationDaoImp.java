@@ -45,10 +45,11 @@ public class AssetAllocationDaoImp implements AssetAllocationDao {
 		LocalDate release_date = form.getReleaseDate();
 		LocalDate allocation_date = LocalDate.now();
 		String assetName = form.getAssetName();
+		System.out.println(assetName);
 		String assetId = asset.read(assetName);
 		String allocationId=assetId+empno;
 		AssetAllocation a=new AssetAllocation( allocationId, assetId, empno,  allocation_date, release_date);
-				 
+			System.out.println(a);	 
 		boolean result = createAssetAllocation(a);
 		f.changeStatusDao(requestId);
 		if(result) {
@@ -64,7 +65,7 @@ public class AssetAllocationDaoImp implements AssetAllocationDao {
 	@Override
 	public boolean createAssetAllocation(AssetAllocation a)  throws  AssetAlreadyExistException{
 		AssetAllocation result=allocations.putIfAbsent(a.getAllocationId(), a);
-	    if(result!=null) {
+	    if(result==null) {
 	    	logger.info("User Master Created Successfully");
 	    	return true;
 	    }
@@ -95,11 +96,11 @@ public class AssetAllocationDaoImp implements AssetAllocationDao {
 		
 	}
 	public static void mockData() {
-		allocations.put("1",new AssetAllocation("xyz1","ABC2","123", LocalDate.parse("2020-02-13"), LocalDate.parse("2020-02-27")));
-		allocations.put("2",new AssetAllocation("xyz2","ABC4","124", LocalDate.parse("2020-01-01"), LocalDate.parse("2020-01-24")));
-		allocations.put("3",new AssetAllocation("xyz3","ABC5","125", LocalDate.parse("2020-01-15"), LocalDate.parse("2020-02-01")));
-		allocations.put("4",new AssetAllocation("xyz4","ABC3","126", LocalDate.parse("2020-01-13"), LocalDate.parse("2020-02-21")));
-		allocations.put("5",new AssetAllocation("xyz6","ABC1","127", LocalDate.parse("2020-01-20"), LocalDate.parse("2020-02-27")));
+		allocations.put("xyz1",new AssetAllocation("xyz1","ABC2","123", LocalDate.parse("2020-02-13"), LocalDate.parse("2020-02-27")));
+		allocations.put("xyz2",new AssetAllocation("xyz2","ABC4","124", LocalDate.parse("2020-01-01"), LocalDate.parse("2020-01-24")));
+		allocations.put("xyz3",new AssetAllocation("xyz3","ABC5","125", LocalDate.parse("2020-01-15"), LocalDate.parse("2020-02-01")));
+		allocations.put("xyz4",new AssetAllocation("xyz4","ABC3","126", LocalDate.parse("2020-01-13"), LocalDate.parse("2020-02-21")));
+		allocations.put("xyz5",new AssetAllocation("xyz6","ABC1","127", LocalDate.parse("2020-01-20"), LocalDate.parse("2020-02-27")));
 	}
 	public void print() {
 		System.out.println(allocations);

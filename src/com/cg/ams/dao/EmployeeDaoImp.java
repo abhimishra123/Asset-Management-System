@@ -25,6 +25,7 @@ public class EmployeeDaoImp implements EmployeeDao {
 	@Override
 	public Employee readEmployee(String Employee_no)throws ReadOperationFailed {
 		Employee e=employees.get(Employee_no);
+		
 		if(e != null) {
 			logger.info("Asset Read Successfully");
 			return e;
@@ -66,12 +67,12 @@ public class EmployeeDaoImp implements EmployeeDao {
 	}
 	
 	public static void mockData() {
-		employees.put("1",new Employee("456","Abhishek","Analyst","Rakesh", LocalDate.parse("2010-02-27"),"KLM2"));
-		employees.put("2",new Employee("457","Samiran","Manager","Rakesh", LocalDate.parse("2015-03-15"),"KLM2"));
-		employees.put("3",new Employee("458","Amarsinh","Consultant","Rakesh", LocalDate.parse("2012-02-15"),"KLM2"));
-		employees.put("4",new Employee("459","Shailesh","CEO","Rakesh", LocalDate.parse("2017-03-14"),"KLM2"));
-		employees.put("5",new Employee("450","Sidhharth","Associate","Rakesh", LocalDate.parse("2020-02-27"),"KLM2"));
-		employees.put("6",new Employee("451","Sonu","Director","Rakesh", LocalDate.parse("2009-01-15"),"KLM2"));
+		employees.put("456",new Employee("456","Abhishek","Analyst","Rakesh", LocalDate.parse("2010-02-27"),"KLM2"));
+		employees.put("457",new Employee("457","Samiran","Manager","Rakesh", LocalDate.parse("2015-03-15"),"KLM2"));
+		employees.put("458",new Employee("458","Amarsinh","Consultant","Rakesh", LocalDate.parse("2012-02-15"),"KLM2"));
+		employees.put("459",new Employee("459","Shailesh","CEO","Rakesh", LocalDate.parse("2017-03-14"),"KLM2"));
+		employees.put("450",new Employee("450","Sidhharth","Associate","Rakesh", LocalDate.parse("2020-02-27"),"KLM2"));
+		employees.put("451",new Employee("451","Sonu","Director","Rakesh", LocalDate.parse("2009-01-15"),"KLM2"));
 		
 
 	}

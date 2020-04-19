@@ -30,7 +30,10 @@ public class AssetDaoImpTest {
 	public void testReadAssetSuccessfully() throws ReadOperationFailed {
 		assertEquals("Mouse", asset.readAsset("ABC2").getAssetName());
 	}
-	
+	@Test(expected=ReadOperationFailed.class)
+	public void testReadAssetFailed() throws ReadOperationFailed {
+		assertEquals("Mouse", asset.readAsset("ABC10").getAssetName());
+	}
 	@Test
 	public void testReadAssets() {
 		assertTrue(true);
@@ -38,17 +41,28 @@ public class AssetDaoImpTest {
 	
 	@Test
 	public void testCreateAssetSuccessfully() throws AssetAlreadyExistException {
-		assertTrue(asset.createAsset(new Asset("ABC6","Speaker","Company:Boat",5,"Available")));
+		assertTrue(asset.createAsset(new Asset("ABC16","Speaker","Company:Boat",5,"Available")));
+	}
+	@Test(expected=AssetAlreadyExistException.class)
+	public void testCreateAssetFailed() throws AssetAlreadyExistException {
+		assertTrue(asset.createAsset(new Asset("ABC16","Speaker","Company:Boat",5,"Available")));
 	}
 	
 	@Test
 	public void testUpdateAssetSuccessfully() throws UpdateFailedException {
 		assertTrue(asset.updateAsset("ABC2", new Asset("ABC2","Mouse","Company:HP",1,"Rejected")));
 	}
-	
+	@Test(expected=UpdateFailedException.class)
+	public void testUpdateAssetFailed() throws UpdateFailedException {
+		assertTrue(asset.updateAsset("ABC12", new Asset("ABC12","Mouse","Company:HP",1,"Rejected")));
+	}
 	@Test
 	public void testDeleteAssetSuccessfully() throws InvalidIdException {
 		assertTrue(asset.deleteAsset("ABC3"));
+	}
+	@Test(expected=InvalidIdException.class)
+	public void testDeleteAssetFailed() throws InvalidIdException {
+		assertTrue(asset.deleteAsset("ABC9"));
 	}
 
 }

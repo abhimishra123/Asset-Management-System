@@ -66,11 +66,11 @@ public class DepartmentDaoImp implements DepartmentDao {
 	
 	}
 	public static void mockData() {
-		departments.put("1",new Department("KLM1","HR"));
-		departments.put("2",new Department("KLM2","L&D"));
-		departments.put("3",new Department("KLM3","CFWG"));
-		departments.put("4",new Department("KLM4","HR"));
-		departments.put("5",new Department("KLM5","L&D"));
+		departments.put("KLM1",new Department("KLM1","HR"));
+		departments.put("KLM2",new Department("KLM2","L&D"));
+		departments.put("KLM3",new Department("KLM3","CFWG"));
+		departments.put("KLM4",new Department("KLM4","HR"));
+		departments.put("KLM5",new Department("KLM5","L&D"));
 	}
 	public void print() {
 		System.out.println(departments);

@@ -103,10 +103,10 @@ public class AssetFormDaoImp implements AssetFormDao {
 			}
 	}
 	public static void mockData() {
-		forms.put("1",new AssetForm("456","Rakesh","Mouse","456Rakesh",LocalDate.parse("2017-10-22"),"Processing"));
-		forms.put("2",new AssetForm("457","Rakesh","CPU","457Rakesh",LocalDate.parse("2017-10-22"),"Processing"));
-		forms.put("3",new AssetForm("458","Rakesh","Monitor","458Rakesh",LocalDate.parse("2017-10-22"),"Processing"));
-		forms.put("4",new AssetForm("459","Rakesh","Mouse","459Rakesh",LocalDate.parse("2017-10-22"),"Processing"));
+		forms.put("456Rakesh",new AssetForm("456","Rakesh","Mouse","456Rakesh",LocalDate.parse("2017-10-22"),"Processing"));
+		forms.put("457Rakesh",new AssetForm("457","Rakesh","CPU","457Rakesh",LocalDate.parse("2017-10-22"),"Processing"));
+		forms.put("458Rakesh",new AssetForm("458","Rakesh","Monitor","458Rakesh",LocalDate.parse("2017-10-22"),"Processing"));
+		forms.put("459Rakesh",new AssetForm("459","Rakesh","Mouse","459Rakesh",LocalDate.parse("2017-10-22"),"Processing"));
 		
 	}
 	

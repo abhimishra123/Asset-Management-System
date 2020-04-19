@@ -14,6 +14,7 @@ import com.cg.ams.bean.Employee;
 import com.cg.ams.bean.UserMaster;
 import com.cg.ams.dao.AssetAllocationDaoImp;
 import com.cg.ams.dao.AssetDaoImp;
+import com.cg.ams.dao.AssetFormDaoImp;
 import com.cg.ams.dao.DepartmentDaoImp;
 import com.cg.ams.dao.EmployeeDaoImp;
 import com.cg.ams.dao.UserMasterDaoImp;
@@ -37,11 +38,15 @@ public class AssetApp {
 		DepartmentDaoImp d=new DepartmentDaoImp();
 		EmployeeDaoImp em=new EmployeeDaoImp();
 		UserMasterDaoImp usd=new UserMasterDaoImp();
+		Employee emp=new Employee();
+		AssetFormDaoImp afd=new AssetFormDaoImp();
+		 emp=null;
 		ad.mockData();
 		d.mockData();
 		aad.mockData();
 		em.mockData();
 		usd.mockData();
+		afd.mockData();
 		
 		UserMaster validate=new UserMaster();
 		Scanner sc =new Scanner(System.in);
@@ -53,13 +58,19 @@ public class AssetApp {
 		password=sc.nextLine();
 		try {
 		validate=authenticate.verify(username,password);
+		System.out.println(validate);
 		
 		}catch(AuthenticationFailedException e) {
 			System.out.println(e.getMessage());
 		}
-		Employee emp = user.employeeData(validate.getEmployee_no());
+		try {
+		 emp = user.employeeData(validate.getEmployee_no());
+		 System.out.println(emp);
+		}catch(ReadOperationFailed e) {
+			System.out.println(e.getMessage());
+		}
 		//Department dept = user.deptData(emp.getDept_Id());
-		//String mgrId = emp.getMgr();
+	//String mgrId = emp.getMgr();
 		//String deptName = dept.getDept_Name();
 		
 		if(validate.getUserType()=="admin") {
@@ -112,11 +123,11 @@ public class AssetApp {
 					String response = sc.next();
 					if(response.equalsIgnoreCase("Approve")){
 					boolean result = admin.requestApprove(requestId);
-					System.out.println(result);
+					System.out.println("Approved");
 					}
 					else if(response.equalsIgnoreCase("Decline")){
 					boolean result = admin.requestDecline(requestId);
-					System.out.println(result);
+					System.out.println("Decline");
 					}
 					else{
 						System.out.println("Enter valid response");
@@ -145,7 +156,7 @@ public class AssetApp {
 					String assetName = sc.next();
 					System.out.println("Enter Release Date: ");
 					String str = sc.next();
-					LocalDate releasedate = LocalDate.now();
+					LocalDate releasedate=LocalDate.parse(str);
 					
 					String empId=validate.getEmployee_no();
 					System.out.println("Employee Id"+empId);
@@ -154,6 +165,7 @@ public class AssetApp {
 					System.out.println("Manager Id"+managerId);
 					String requestId=emp.getEmployee_no()+emp.getMgr();
 					AssetForm form = new AssetForm(empId, managerId, assetName,requestId,releasedate,"processing");
+					System.out.println(form);
 					try {
 					boolean update=user.raiseRequest(form);
 					if(update)

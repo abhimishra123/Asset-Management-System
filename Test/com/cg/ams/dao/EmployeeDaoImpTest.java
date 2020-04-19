@@ -52,16 +52,16 @@ public class EmployeeDaoImpTest {
 	}
 	@Test(expected=UpdateFailedException.class)
 	public void testUpdateEmployeeFailed() throws UpdateFailedException {
-		assertTrue(emp.updateEmployee("458", new Employee("458","Amarsinh","Analyst","Rakesh", LocalDate.parse("2012-02-15"),"KLM1")));
+		assertTrue(emp.updateEmployee("470", new Employee("470","Abhi","Manager","Rakesh45", LocalDate.parse("2012-02-16"),"KLM1")));
 	}
 	
 	@Test
 	public void testDeleteEmployeeSuccessfully() throws InvalidIdException{
-		assertTrue(emp.deleteEmployee("460"));
+		assertTrue(emp.deleteEmployee("458"));
 	}
 	@Test(expected=InvalidIdException.class)
 	public void testDeleteEmployeeFailed() throws InvalidIdException{
-		assertTrue(emp.deleteEmployee("461"));
+		assertTrue(emp.deleteEmployee("480"));
 	}
 
 }

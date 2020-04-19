@@ -85,13 +85,13 @@ public UserMaster verifyDao(String username, String password) throws Authenticat
 		
 	}
 	public static void mockData(){
-		users.put("1",new UserMaster("123456","Abhishek","987456","admin","456"));
-		users.put("2",new UserMaster("423456","Samiran","902860@ab","Admin","457"));
-		users.put("3",new UserMaster("523456","Amarsinh","456879@wr","Manager","458"));
-		users.put("4",new UserMaster("923456","manager","1234","manager","460"));
-		users.put("5",new UserMaster("1823456","Abhinash","Kamla@48","Manager","460"));
-		users.put("6",new UserMaster("923456","Sonu","Kapoor@234","Admin","459"));
-		users.put("7",new UserMaster("723456","Aakash","abhhish@345","Manager","461"));
+		users.put("123456",new UserMaster("123456","Abhishek","987456","admin","456"));
+		users.put("423456",new UserMaster("423456","Samiran","902860@ab","Admin","457"));
+		users.put("523456",new UserMaster("523456","Amarsinh","456879@wr","Manager","458"));
+		users.put("923456",new UserMaster("923456","manager","1234","manager","460"));
+		users.put("1823456",new UserMaster("1823456","Abhinash","Kamla@48","Manager","460"));
+		users.put("923456",new UserMaster("923456","Sonu","Kapoor@234","Admin","459"));
+		users.put("723456",new UserMaster("723456","Aakash","abhhish@345","Manager","461"));
 	}
 	public void print() {
 		System.out.println(users);

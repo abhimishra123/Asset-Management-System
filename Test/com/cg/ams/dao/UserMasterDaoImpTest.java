@@ -63,7 +63,7 @@ public class UserMasterDaoImpTest {
 	}
 	@Test(expected=UpdateFailedException.class)
 	public void testUpdateUserMasterFailed() throws UpdateFailedException {
-		assertTrue(user.updateUserMaster("423456", new UserMaster("423456","Samiran","81495","Admin","GHF2")));
+		assertTrue(user.updateUserMaster("4234", new UserMaster("4234","Sami","814","manager","GHF3")));
 	}
 	
 	@Test

@@ -32,21 +32,31 @@ public class DepartmentDaoImpTest {
 	}
 	@Test(expected=ReadOperationFailed.class)
 	public void testReadDepartmentFailed() throws ReadOperationFailed {
-		assertEquals("HR1", dept.readDepartment("KLM2").getDept_Name());
+		assertEquals("pq", dept.readDepartment("KLM8").getDept_Name());
 	}
 	
 	@Test
 	public void testCreateDepartmentSuccessfully() throws AssetAlreadyExistException {
 		assertTrue(dept.createDepartment(new Department("KLM10","BI")));
 	}
-	
+	@Test(expected=AssetAlreadyExistException.class)
+	public void testCreateDepartmentFailed() throws AssetAlreadyExistException {
+		assertTrue(dept.createDepartment(new Department("KLM10","BI")));
+	}
 	@Test
 	public void testUpdateDepartmentSuccessfully() throws UpdateFailedException {
 		assertTrue(dept.updateDepartment("KLM1", new Department("KLM10", "B")));
 	}
-	
+	@Test(expected=UpdateFailedException.class)
+	public void testUpdateDepartmentFailed() throws UpdateFailedException {
+		assertTrue(dept.updateDepartment("LMN", new Department("LMN10", "G")));
+	}
 	@Test
 	public void testDeleteDepartmentSuccessfully() throws InvalidIdException {
 		assertTrue(dept.deleteDepartment("KLM5"));
+	}
+	@Test(expected=InvalidIdException.class)
+	public void testDeleteDepartmentFailed() throws InvalidIdException {
+		assertTrue(dept.deleteDepartment("KLM15"));
 	}
 }

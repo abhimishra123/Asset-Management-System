@@ -1,5 +1,5 @@
-package com.cg.ams.dao;
 
+package com.cg.ams.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,11 +88,11 @@ public boolean deleteAsset(String AssetId)throws InvalidIdException {
 	throw new InvalidIdException();
 }
 public static void mockData() {
-	assets.put("1",new Asset("ABC1","Monitor","Company:Lenovo c19-10,Screen:47cms",1,"Confirmed"));
-	assets.put("2",new Asset("ABC2","Mouse","Company:Dell",1,"Rejected"));
-	assets.put("3",new Asset("ABC3","Printer","Company:HP,Black Original Laser Jet ",1,"Accepted"));
-	assets.put("4",new Asset("ABC4","Laptop","Company:Dell,RAM:4GB",1,"Rejected"));
-	assets.put("5",new Asset("ABC5","CPU","Company:Lenovo,RAM:8GB,HDD:1TB",2,"Accepted"));
+	assets.put("ABC1",new Asset("ABC1","Monitor","Company:Lenovo c19-10,Screen:47cms",1,"Available"));
+	assets.put("ABC2",new Asset("ABC2","Mouse","Company:Dell",1,"Availabled"));
+	assets.put("ABC3",new Asset("ABC3","Printer","Company:HP,Black Original Laser Jet ",1,"Available"));
+	assets.put("ABC4",new Asset("ABC4","Laptop","Company:Dell,RAM:4GB",1,"Available"));
+	assets.put("ABC5",new Asset("ABC5","CPU","Company:Lenovo,RAM:8GB,HDD:1TB",2,"Available"));
 }
 public void print() {
 	System.out.println(assets);
